@@ -2,227 +2,6 @@ package com.example.project_2
 
 
 
-//
-//import android.Manifest
-//import android.app.Activity
-//import android.content.ContentValues.TAG
-//import android.content.Context
-//import android.content.pm.PackageManager
-//import android.os.Bundle
-//import android.util.Log
-//import androidx.fragment.app.Fragment
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.core.app.ActivityCompat
-//import androidx.core.content.ContextCompat
-//import com.google.android.gms.maps.CameraUpdateFactory
-//import com.google.android.gms.maps.GoogleMap
-//import com.google.android.gms.maps.OnMapReadyCallback
-//import com.google.android.gms.maps.SupportMapFragment
-//import com.google.android.gms.maps.model.BitmapDescriptorFactory
-//import com.google.android.gms.maps.model.GroundOverlayOptions
-//import com.google.android.gms.maps.model.LatLng
-//import com.google.android.gms.maps.model.MarkerOptions
-//import java.util.Locale
-//
-//class     GoogleMaps : Fragment(), OnMapReadyCallback {
-//
-//    private lateinit var mMap: GoogleMap
-//    private val REQUEST_LOCATION_PERMISSION = 1
-//    private var userLocation: LatLng? = null
-//
-//    private var currentLocationListener: OnCurrentLocationListener? = null
-//
-//    interface OnCurrentLocationListener {
-//        fun onCurrentLocationReceived(location: LatLng)
-//    }
-//
-//    // Function to set the current location listener
-//    fun setCurrentLocationListener(listener: OnCurrentLocationListener?) {
-//        currentLocationListener = listener
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        val view = inflater.inflate(R.layout.fragment_google_maps, container, false)
-//
-//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
-//        Log.d(TAG, "GooglwMap")
-//        return view
-//
-//    }
-//
-//    /**
-//     * Manipulates the map once available.
-//     * This callback is triggered when the map is ready to be used.
-//     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-//     * we just add a marker at a specific location.
-//     */
-//
-//
-//
-//
-//
-//
-////    private var currentLocationListener: OnCurrentLocationListener? = null
-//
-//    // ...
-//
-//    override fun onMapReady(googleMap: GoogleMap) {
-//        mMap = googleMap
-//        val zoomLevel = 15f
-//
-//        // Add a marker in London and move the camera
-//        val london = LatLng(42.9849233, -81.245276) // London
-//        mMap.addMarker(MarkerOptions().position(london).title("Marker in London"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(london, zoomLevel))
-//        setMapLongClick(mMap)
-//        setPoiClick(mMap)
-//        val overlaySize = 100f
-//        val androidOverlay = GroundOverlayOptions()
-//            .image(BitmapDescriptorFactory.fromResource((R.drawable.android)))
-//            .position(london, overlaySize)
-//        mMap.addGroundOverlay(androidOverlay)
-//        enableMyLocation(requireContext())
-//
-//        // Pass the current location to the parent activity/fragment
-//        currentLocationListener?.onCurrentLocationReceived(london)
-//        Log.d(TAG, "Current Location")
-//    }
-//
-//    // Function to set the current location listener
-////    fun setCurrentLocationListener(listener: OnCurrentLocationListener?) {
-////        currentLocationListener = listener
-////    }
-//
-//
-//
-//
-//
-//
-//    private fun setMapLongClick(map:GoogleMap){
-//        map.setOnMapLongClickListener { latLng ->
-//            val snippet = String.format(
-//                Locale.getDefault(),
-//                "Lat: %1$.5f, Long: %2$.5f",
-//                latLng.latitude,
-//                latLng.longitude
-//            )
-//            map.addMarker(
-//                MarkerOptions()
-//                    .position(latLng)
-//                    .title(getString(R.string.dropped_pin))
-//                    .snippet(snippet)
-//                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-//            )
-//        }
-//    }
-//
-//    private fun setPoiClick(map: GoogleMap){
-//        map.setOnPoiClickListener { poi ->
-//            val poiMarker = map.addMarker(
-//                MarkerOptions()
-//                    .position(poi.latLng)
-//                    .title(poi.name)
-//            )
-//            poiMarker?.showInfoWindow()
-//        }
-//    }
-//
-////    private fun isPermissionGranted() : Boolean{
-////        return ContextCompat.checkSelfPermission(
-////            this,
-////            android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-////    }
-//
-//    private fun isPermissionGranted(context: Context): Boolean {
-//        return ContextCompat.checkSelfPermission(
-//            context,
-//            android.Manifest.permission.ACCESS_COARSE_LOCATION
-//        ) == PackageManager.PERMISSION_GRANTED
-//    }
-//
-//
-////    private fun enableMyLocation(){
-////        if (isPermissionGranted()){
-////            mMap.isMyLocationEnabled = true
-////        }
-////        else {
-////            ActivityCompat.requestPermissions(
-////                this,
-////                arrayOf<String>(android.Manifest.permission.ACCESS_COARSE_LOCATION),
-////                REQUEST_LOCATION_PERMISSION
-////            )
-////        }
-////    }
-//
-//    private fun enableMyLocation(context: Context) {
-//        if (ActivityCompat.checkSelfPermission(
-//                context,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED &&
-//            ActivityCompat.checkSelfPermission(
-//                context,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED
-//        ) {
-//            // Request location permissions
-//            ActivityCompat.requestPermissions(
-//                context as Activity,
-//                arrayOf(
-//                    Manifest.permission.ACCESS_FINE_LOCATION,
-//                    Manifest.permission.ACCESS_COARSE_LOCATION
-//                ),
-//                REQUEST_LOCATION_PERMISSION
-//            )
-//        } else {
-//            // Location permissions are already granted or have been requested
-//            // Enable "My Location" on the map here
-//
-//
-//            ActivityCompat.requestPermissions(
-//                requireActivity(),
-//                arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),
-//                REQUEST_LOCATION_PERMISSION
-//            )
-//        }
-//    }
-//
-//
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        if (requestCode == REQUEST_LOCATION_PERMISSION){
-//            if (grantResults.contains(PackageManager.PERMISSION_GRANTED)){
-//                enableMyLocation(requireContext())
-//            }
-//        }
-//    }
-//
-////    private fun setMapStyle(map:GoogleMap){
-////        try{
-////            val success = map.setMapStyle(
-////                MapStyleOptions.loadRawResourceStyle(
-////                    this,
-////                    R.raw.map_style
-////                )
-////            )
-////            if (!success){
-////                Log.e(TAG, "Style parsing failed.")
-////            }
-////        } catch (e: Resources.NotFoundException){
-////            Log.e(TAG, "Can't find style. Error", e)
-////        }
-////    }
-//}
 
 
 import android.Manifest
@@ -336,11 +115,10 @@ class GoogleMaps : Fragment(), OnMapReadyCallback{
                 fusedLocationClient.requestLocationUpdates(
                     locationRequest,
                     locationCallback,
-                    null // Use the main looper for callbacks (can be any Looper if needed)
+                    null
                 )
             } catch (e: SecurityException) {
-                // Handle the SecurityException here if the location permission is denied
-                // You can show an error message or request location permissions again
+
                 requestLocationPermissions()
             }
         } else {
@@ -375,16 +153,15 @@ class GoogleMaps : Fragment(), OnMapReadyCallback{
                     )
                 )
 
-                // Add a red marker at the current location
-                mMap.clear() // Clear existing markers (optional)
+
+                mMap.clear()
                 mMap.addMarker(MarkerOptions().position(currentLocation!!).icon(
                     BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
 
-                // Stop requesting location updates after the first result (optional)
+
                 fusedLocationClient.removeLocationUpdates(this)
             } else {
-                // Handle the case when the location is null
-                // You can show an error message or retry requesting location updates
+
             }
         }
     }
@@ -409,7 +186,7 @@ class GoogleMaps : Fragment(), OnMapReadyCallback{
                     // Set the fields to specify which types of place data to return
                     val placeFields = listOf(Place.Field.NAME, Place.Field.ADDRESS)
 
-                    // Create a FindCurrentPlaceRequest and fetch the current place
+
                     val request = FindCurrentPlaceRequest.builder(placeFields).build()
                     placesClient.findCurrentPlace(request)
                         .addOnCompleteListener { task ->
@@ -432,7 +209,7 @@ class GoogleMaps : Fragment(), OnMapReadyCallback{
                 }
             }
         } else {
-            // Handle the case where the location permission is not granted
+
             Log.e("Nearby Places", "Location permission not granted")
         }
 
@@ -440,11 +217,19 @@ class GoogleMaps : Fragment(), OnMapReadyCallback{
 }
 
      fun showNearbyPlacesInGooglePlacesFragment(nearbyPlaces: List<Place>) {
-        // Create or get the instance of GooglePlacesFragment
+
         val googlePlacesFragment = GooglePlaces.newInstance(nearbyPlaces)
-        requireActivity().supportFragmentManager.beginTransaction()
+       requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerView, googlePlacesFragment, "GooglePlacesFragment")
-            .commit()
+
+           .commit()
+
+//         requireActivity().supportFragmentManager.beginTransaction()
+//             .add(R.id.fragmentContainerView, googlePlacesFragment, "GooglePlacesFragment")
+//             .addToBackStack(null)
+//             .commit()
+
+
     }
 
 
@@ -458,11 +243,10 @@ class GoogleMaps : Fragment(), OnMapReadyCallback{
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             // Check if the user granted the location permissions
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, enable my location and request location updates
+
                 enableMyLocation()
             } else {
-                // Permission denied, handle this case appropriately
-                // You can show an error message or disable location-related functionality
+
             }
         }
     }
@@ -477,10 +261,7 @@ class GoogleMaps : Fragment(), OnMapReadyCallback{
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         ) {
-            // Show an explanation to the user here if needed
-            // You can show a dialog explaining why location permission is necessary
 
-            // Then, request location permissions again
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(

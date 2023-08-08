@@ -26,10 +26,10 @@ class Email : Fragment() {
         val btnSendEmail: Button = view.findViewById(R.id.btnSendEmail)
         btnSendEmail.setOnClickListener { sendEmail() }
 
-        // Obtain the shared preferences from the fragment's context
+
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-        // Load the last used email address from SharedPreferences
+
         val lastUsedEmail = sharedPreferences.getString("lastUsedEmail", "")
         editTextRecipient.setText(lastUsedEmail)
 
@@ -39,13 +39,13 @@ class Email : Fragment() {
     private fun sendEmail() {
         val recipient = editTextRecipient.text.toString().trim()
 
-        // Save the entered email address to shared preferences
+
         sharedPreferences.edit().putString("lastUsedEmail", recipient).apply()
 
-        // Replace the following placeholders with the actual location information
-        val latitude = 37.7749
-        val longitude = -122.4194
-        val address = "San Francisco, CA"
+
+        val latitude = 42.9849
+        val longitude = -81.2453
+        val address = "London, ON"
 
         val subject = "Location Details"
         val message = "Latitude: $latitude\nLongitude: $longitude\nAddress: $address"

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), GoogleMaps.OnCurrentLocationListener, 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Places.initialize(applicationContext, "YOUR_API_KEY")
+        Places.initialize(applicationContext, "AIzaSyAnYTe2LVCEKH-MjYOUyOpWeCaIG4T9BS4")
         placesClient = Places.createClient(this)
 
         googleMapsFragment = GoogleMaps()
